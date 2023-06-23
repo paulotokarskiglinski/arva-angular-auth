@@ -1,9 +1,17 @@
-import { HttpEvent, HttpInterceptorFn } from '@angular/common/http';
+import {
+  HttpEvent,
+  HttpHandlerFn,
+  HttpInterceptorFn,
+  HttpRequest,
+} from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { AuthService } from '../services/auth.service';
 
-const httpIntercept = (request: any, next: any): Observable<HttpEvent<any>> => {
+const httpIntercept = (
+  request: HttpRequest<unknown>,
+  next: HttpHandlerFn,
+): Observable<HttpEvent<unknown>> => {
   const authService = inject(AuthService);
   const token = authService.getToken();
 
