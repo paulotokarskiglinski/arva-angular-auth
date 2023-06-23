@@ -1,0 +1,108 @@
+{
+  "$schema": "./node_modules/@angular/cli/lib/config/schema.json",
+  "version": 1,
+  "newProjectRoot": "ng",
+  "projects": {
+    "cockpit": {
+      "projectType": "application",
+      "root": "ng/cockpit",
+      "sourceRoot": "ng/cockpit/src",
+      "prefix": "ckp",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser-esbuild",
+          "options": {
+            "outputPath": "dist/cockpit/browser",
+            "index": "ng/cockpit/src/index.html",
+            "main": "ng/cockpit/src/main.ts",
+            "polyfills": ["zone.js"],
+            "tsConfig": "ng/cockpit/tsconfig.app.json",
+            "assets": ["ng/cockpit/src/favicon.ico", "ng/cockpit/src/assets"],
+            "styles": [
+              "@angular/material/prebuilt-themes/indigo-pink.css",
+              "ng/cockpit/src/styles/index.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "all"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "extractLicenses": false,
+              "sourceMap": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "configurations": {
+            "production": {
+              "browserTarget": "cockpit:build:production"
+            },
+            "development": {
+              "browserTarget": "cockpit:build:development"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "server": {
+          "builder": "@angular-devkit/build-angular:server",
+          "options": {
+            "outputPath": "dist/cockpit/server",
+            "main": "ng/cockpit/server.ts",
+            "tsConfig": "ng/cockpit/tsconfig.server.json",
+            "inlineStyleLanguage": "scss"
+          },
+          "configurations": {
+            "production": {
+              "outputHashing": "media"
+            },
+            "development": {
+              "buildOptimizer": false,
+              "optimization": false,
+              "sourceMap": true,
+              "extractLicenses": false,
+              "vendorChunk": true
+            }
+          },
+          "defaultConfiguration": "production"
+        },
+        "serve-ssr": {
+          "builder": "@nguniversal/builders:ssr-dev-server",
+          "configurations": {
+            "development": {
+              "browserTarget": "cockpit:build:development",
+              "serverTarget": "cockpit:server:development"
+            },
+            "production": {
+              "browserTarget": "cockpit:build:production",
+              "serverTarget": "cockpit:server:production"
+            }
+          },
+          "defaultConfiguration": "development"
+        },
+        "prerender": {
+          "builder": "@nguniversal/builders:prerender",
+          "options": {
+            "routes": ["/"]
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "cockpit:build:production",
+              "serverTarget": "cockpit:server:production"
+            },
+            "development": {
+              "browserTarget": "cockpit:build:development",
+              "serverTarget": "cockpit:server:development"
+            }
+          },
+          "defaultConfiguration": "production"
+        }
+      }
+    }
+  }
+}

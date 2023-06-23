@@ -1,0 +1,32 @@
+#card-login {
+  left: 0;
+  right: 0;
+  margin: auto;
+
+  #button-login {
+    width: 100%;
+  }
+
+  #img-placeholder {
+    width: 100%;
+    text-align: center;
+
+    img {
+      width: 100px;
+      height: auto;
+      border-radius: 15px;
+    }
+  }
+}
+
+@media only screen and (min-width: 769px) and (max-width: 1239px) {
+  #card-login {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 1240px) {
+  #card-login {
+    width: 30%;
+  }
+}

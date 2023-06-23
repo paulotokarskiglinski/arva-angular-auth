@@ -1,0 +1,43 @@
+<ckp-toolbar></ckp-toolbar>
+
+<div class="main">
+  <mat-card class="card-container">
+    <mat-card-header>
+      <mat-card-title>User List</mat-card-title>
+    </mat-card-header>
+
+    <mat-card-content>
+      <mat-list
+        *ngIf="userList() as userList"
+        infiniteScroll
+        (scrolled)="onScroll()"
+      >
+        <mat-list-item *ngFor="let user of userList.users">
+          <div matListItemAvatar>
+            <img
+              [ngSrc]="user.image"
+              width="50"
+              height="50"
+              alt="User image"
+              class="img-user"
+            />
+          </div>
+          <div matListItemIcon>
+            <button mat-icon-button aria-label="Edit" (click)="edit(user.id)">
+              <mat-icon>edit</mat-icon>
+            </button>
+          </div>
+          <div matListItemTitle>{{ user.firstName }} {{ user.lastName }}</div>
+          <div matListItemLine><b>Username: </b>{{ user.username }}</div>
+          <div matListItemLine><b>Email: </b>{{ user.email }}</div>
+        </mat-list-item>
+      </mat-list>
+
+      <mat-spinner
+        *ngIf="loading()"
+        [diameter]="60"
+        color="accent"
+      ></mat-spinner>
+    </mat-card-content>
+  </mat-card>
+</div>
